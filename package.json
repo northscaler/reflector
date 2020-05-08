@@ -1,6 +1,6 @@
 {
   "name": "@northscaler/reflector",
-  "version": "0.1.0-rc.1",
+  "version": "0.1.0",
   "description": "JavaScript reflection for mere mortals",
   "repository": {
     "type": "git",
