@@ -26,6 +26,19 @@ console.log(Reflector.getClassOf(sub) === Sub) // logs true
 console.log(Reflector.getSuperclassOf(Sub) === Sup) // logs true
 
 console.log(Reflector.getAllMethodDescriptors(Sub))
-// logs { own: <Sub methods>, super: { own: <Sup methods>, super: { own: <Object methods> } } }
 
-// ...and lots more.
+const defineObjectPrototypeClassProperty = require('../../main/Object.prototype.class')
+
+defineObjectPrototypeClassProperty()
+
+class It {hello () { return 'hello' }}
+
+const it = new It()
+
+console.log(it.class === It)
+
+const plain = {}
+
+plain.class = It
+
+console.log(plain.hello())

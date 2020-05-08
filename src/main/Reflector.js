@@ -6,8 +6,10 @@ function assertFunction (it) {
 
 /**
  * @typedef MethodDescriptors
- * @property {{string: PropertyDescriptor}} own
- * @property {MethodDescriptors} super
+ * @property {string} name The name of the class whose methods are given in this object's `own` property.
+ * @property {{string: PropertyDescriptor}} own An object whose keys are method names and whose values are `PropertyDescriptor`s.
+ * @property {MethodDescriptors} [super] Recursive property that is as above except for the class's superclass.
+ * Only present if the class has a superclass.
  */
 
 /**
@@ -36,7 +38,7 @@ class Reflector {
   static getAllMethodDescriptors (clazz) {
     assertFunction(clazz)
 
-    const methods = { own: Reflector.getOwnMethodDescriptors(clazz) }
+    const methods = { name: clazz.name, own: Reflector.getOwnMethodDescriptors(clazz) }
 
     const superclass = Reflector.getSuperclassOf(clazz)
     if (superclass) methods.super = Reflector.getAllMethodDescriptors(superclass)

@@ -132,7 +132,9 @@ describe('unit tests of Reflector', function () {
     }
 
     const methods = Reflector.getAllMethodDescriptors(Sub)
+    expect(methods.name).to.equal('Sub')
     expect(Object.keys(methods.own).sort()).to.deep.equal(['sub', 'constructor'].sort())
+    expect(methods.super.name).to.equal('Sup')
     expect(Object.keys(methods.super.own).sort()).to.deep.equal(['sup', 'constructor'].sort())
   })
 
