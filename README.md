@@ -68,9 +68,3 @@ console.log(plain.hello()) // logs hello
 ```
 
 See the tests in `test/unit/Object.prototype.class.spec.js` for more information.
-
-## More information
-
-TODO
-
-See the docs unit tests for more information
