@@ -5,6 +5,12 @@ function assertFunction (it) {
 }
 
 /**
+ * @typedef MethodDescriptors
+ * @property {{string: PropertyDescriptor}} own
+ * @property {MethodDescriptors} super
+ */
+
+/**
  * Convenient Reflector class.
  */
 class Reflector {
@@ -12,7 +18,7 @@ class Reflector {
    * Returns method descriptors for the given class, not ascending the prototype chain.
    *
    * @param {function} clazz The class constructor function.
-   * @return {{[name: string]: PropertyDescriptor}}
+   * @return {{string: PropertyDescriptor}}
    */
   static getOwnMethodDescriptors (clazz) {
     assertFunction(clazz)
@@ -25,7 +31,7 @@ class Reflector {
    * The object returned has an `own` property containing the class's own methods, and, if the class has a superclass, a `super` property containing the same structure, recursively up the prototype chain.
    *
    * @param {function} clazz The class constructor function.
-   * @return {{ own: {[name: string]: PropertyDescriptor}, super: @return}}
+   * @return {MethodDescriptors}
    */
   static getAllMethodDescriptors (clazz) {
     assertFunction(clazz)
@@ -43,7 +49,7 @@ class Reflector {
    *
    * @param {function} clazz The class constructor function.
    * @param {object} [thiz] A `this` reference that, if given, the returned functions are `bind`ed to, else the functions are not bound.
-   * @return {{[name: string]: function}}
+   * @return {{string: function}}
    */
   static getOwnMethods (clazz, thiz) {
     assertFunction(clazz)
@@ -67,7 +73,7 @@ class Reflector {
    *
    * @param {function} clazz The class constructor function.
    * @param {object} [thiz] A `this` reference that, if given, the returned functions are `bind`ed to, else the functions are not bound.
-   * @return {{[name: string]: function}}
+   * @return {{string: function}}
    */
   static getVirtualMethods (clazz, thiz) {
     function addVirtualMethods (methods, clazz, thiz) {
@@ -99,11 +105,11 @@ class Reflector {
   /**
    * Get the class function of the given object.
    *
-   * @param {object} instance The instance whose class is being returned.
+   * @param {object} object The instance whose class is being returned.
    * @return {function}
    */
-  static getClassOf (instance) {
-    return Reflector.getPrototypeOf(instance).constructor
+  static getClassOf (object) {
+    return Reflector.getPrototypeOf(object).constructor
   }
 }
 
