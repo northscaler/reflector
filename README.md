@@ -10,7 +10,7 @@ It also allows you to add a `class` property to `Object.prototype` if you like d
 ```javascript
 'use strict'
 
-const { Reflector } = require('@northscaler/reflector')
+const Reflector = require('@northscaler/reflector')
 
 class Sup {
   go () { return 'sup gone' }
